@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "dotenv run npx tsx watch index.ts",
     "build": "vite build",
     "dev": "vite build --watch",
     "lint": "eslint .",
@@ -32,6 +32,7 @@
     "eslint-plugin-react": "^7.37.4",
     "globals": "^16.0.0",
     "prisma": "^6.4.1",
+    "tsx": "^4.19.3",
     "typescript": "^5.3.3",
     "vite": "^5.1.4",
     "vite-plugin-node": "^4.0.0"
