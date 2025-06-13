@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="57" height="57" viewBox="0 0 57 57" xml:space="preserve">
+<desc>Created with Fabric.js 5.2.4</desc>
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 28.5 28.5)" id="f945a92a-191e-4ea9-b49f-cf5860cb5db9"  >
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke"  x="-28.5" y="-28.5" rx="0" ry="0" width="57" height="57" />
+</g>
+<g transform="matrix(Infinity NaN NaN Infinity 0 0)" id="cb306681-4441-47e0-a448-6dcfe0ad10e6"  >
+</g>
+<g transform="matrix(1 0 0 1 28.5 28.5)"  >
+<g style="" vector-effect="non-scaling-stroke"   >
+		<g transform="matrix(1 0 0 1 0 0)"  >
+<circle style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(151,151,151); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  cx="0" cy="0" r="28.5" />
+</g>
+		<g transform="matrix(1 0 0 1 0 0)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(253,253,253); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(-32.5, -28.5)" d="M 25.4466 20.7041 C 25.6435 20.5072 25.9106 20.3966 26.1891 20.3966 C 26.4675 20.3966 26.7346 20.5072 26.9315 20.7041 L 32.5 26.2726 L 38.0685 20.7041 C 38.2654 20.5072 38.5325 20.3966 38.8109 20.3966 C 39.0894 20.3966 39.3565 20.5072 39.5534 20.7041 L 40.2959 21.4466 C 40.4928 21.6435 40.6034 21.9106 40.6034 22.1891 C 40.6034 22.4675 40.4928 22.7346 40.2959 22.9315 L 34.7274 28.5 L 40.2959 34.0685 C 40.4928 34.2654 40.6034 34.5325 40.6034 34.8109 C 40.6034 35.0894 40.4928 35.3565 40.2959 35.5534 L 39.5534 36.2959 C 39.3565 36.4928 39.0894 36.6034 38.8109 36.6034 C 38.5325 36.6034 38.2654 36.4928 38.0685 36.2959 L 32.5 30.7274 L 26.9315 36.2959 C 26.7346 36.4928 26.4675 36.6034 26.1891 36.6034 C 25.9106 36.6034 25.6435 36.4928 25.4466 36.2959 L 24.7041 35.5534 C 24.5072 35.3565 24.3966 35.0894 24.3966 34.8109 C 24.3966 34.5325 24.5072 34.2654 24.7041 34.0685 L 30.2726 28.5 L 24.7041 22.9315 C 24.5072 22.7346 24.3966 22.4675 24.3966 22.1891 C 24.3966 21.9106 24.5072 21.6435 24.7041 21.4466 L 25.4466 20.7041 Z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+</svg>
