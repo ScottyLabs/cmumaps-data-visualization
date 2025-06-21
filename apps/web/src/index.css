@@ -22,4 +22,7 @@
   .btn-shadow {
     @apply shadow-md shadow-gray-400;
   }
+  .btn-shadow-dark {
+    @apply shadow-md shadow-gray-500;
+  }
 }
