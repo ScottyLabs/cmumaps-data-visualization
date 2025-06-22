@@ -190,4 +190,30 @@ export const floorService = {
 
     return rooms;
   },
+
+  getFloorInfo: async (floorCode: string) => {
+    const buildingCode = extractBuildingCode(floorCode);
+    const floorLevel = extractFloorLevel(floorCode);
+
+    const floor = await prisma.floor.findUnique({
+      where: { buildingCode_floorLevel: { buildingCode, floorLevel } },
+    });
+
+    if (!floor) {
+      throw new Error("Floor not found");
+    }
+
+    // Return the floor data in the format you want
+    return {
+      buildingCode: floor.buildingCode,
+      floorLevel: floor.floorLevel,
+      centerX: floor.centerX,
+      centerY: floor.centerY,
+      centerLatitude: floor.centerLatitude,
+      centerLongitude: floor.centerLongitude,
+      scale: floor.scale,
+      angle: floor.angle,
+    };
+  },
+
 };

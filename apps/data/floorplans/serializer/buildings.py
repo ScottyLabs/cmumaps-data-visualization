@@ -1,0 +1,42 @@
+# Script to create a serialized version of buildings.json from the database.
+# python floorplans/serializer/buildings.py
+import os
+import sys
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
+from auth_utils.get_clerk_jwt import get_clerk_jwt
+
+import requests
+import json
+    
+def buildings_serializer():
+    """
+    Fetches floor data from the server and saves it to the buildings_serialized.json
+    """
+    
+    server_url = os.getenv("SERVER_URL")
+    
+    headers = {"Authorization": f"Bearer {get_clerk_jwt()}"}
+    
+    buildings_response = requests.get(
+        f"{server_url}/api/buildings", 
+        headers=headers)
+
+    buildings_response.raise_for_status() # debugging
+    buildings = buildings_response.json()
+    
+    all_buildings_data = {}
+    
+    for building in buildings:
+        building_info = buildings[building]
+        
+        building_dict = {}
+        # populate building_dict
+        building_dict["name"] = building_info['name']
+        building_dict["osmId"] = building_info['osm']
+        
+        all_buildings_data[building] = building_dict
+    
+if __name__ == "__main__":
+    buildings_serializer()

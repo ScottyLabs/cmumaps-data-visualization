@@ -1,5 +1,5 @@
 # Script that combines other json-to-database scripts to populate entire database
-# python scripts/json-to-database/database-population.py
+# python floorplans/deserializer/database_population.py
 import os
 import sys
 

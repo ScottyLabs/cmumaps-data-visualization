@@ -8,5 +8,6 @@ floorRouter.get("/:id/graph", floorController.getFloorGraph);
 floorRouter.get("/:id/rooms", floorController.getFloorRooms);
 floorRouter.get("/:id/pois", floorController.getFloorPois);
 floorRouter.get("/:id/floorplan", floorController.getFloorplan);
+floorRouter.get("/:id/floorinfo", floorController.getFloorInfo)
 
 export default floorRouter;

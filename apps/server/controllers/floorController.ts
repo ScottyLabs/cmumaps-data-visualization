@@ -48,4 +48,15 @@ export const floorController = {
       handleControllerError(res, error, "getting floor plan");
     }
   },
+
+  getFloorInfo: async (req: Request, res: Response) => {
+    const floorCode = req.params.id;
+
+    try {
+      const floorInfo = await floorService.getFloorInfo(floorCode);
+      res.json(floorInfo);
+    } catch (error) {
+      handleControllerError(res, error, "getting floor info");
+    }
+  }
 };
