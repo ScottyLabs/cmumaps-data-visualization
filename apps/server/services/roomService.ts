@@ -1,6 +1,7 @@
 import {
   extractBuildingCode,
   extractFloorLevel,
+  type GeoCoordinate,
   type Placement,
   type RoomInfo,
 } from "@cmumaps/common";
@@ -84,5 +85,81 @@ export const roomService = {
       where: { roomId },
       data,
     });
+  },
+
+  async getRoomIds(floorCode: string) {
+    const buildingCode = extractBuildingCode(floorCode);
+    const floorLevel = extractFloorLevel(floorCode);
+
+    const rooms = await prisma.room.findMany({
+      where: {
+        buildingCode: buildingCode,
+        floorLevel: floorLevel,
+      },
+      select: {
+        roomId: true,
+      },
+    });
+
+    return rooms.map((room) => room.roomId);
+  },
+
+  async getRooms(roomId?: string) {
+    // If a specific room ID is provided, find only that room.
+    if (roomId) {
+      const dbRoom = await prisma.room.findUnique({
+        where: { roomId },
+        include: {
+          aliases: true,
+        },
+      });
+
+      // If no room is found with that ID, return an empty object.
+      if (!dbRoom) {
+        return {};
+      }
+
+      // Return an object containing only the single requested room.
+      return {
+        [dbRoom.roomId]: {
+          id: dbRoom.roomId,
+          name: dbRoom.name,
+          type: dbRoom.type,
+          labelLatitude: dbRoom.labelLatitude,
+          labelLongitude: dbRoom.labelLongitude,
+          polygon: dbRoom.polygon as unknown as GeoCoordinate[][],
+          buildingCode: dbRoom.buildingCode,
+          floorLevel: dbRoom.floorLevel,
+          aliases: dbRoom.aliases.map((alias) => alias.alias),
+          displayAlias:
+            dbRoom.aliases.find((alias) => alias.isDisplayAlias)?.alias ?? null,
+        },
+      };
+    } else {
+      // If no ID is provided, get all rooms (original behavior).
+      const dbRooms = await prisma.room.findMany({
+        include: {
+          aliases: true,
+        },
+      });
+
+      const rooms = {};
+      for (const dbRoom of dbRooms) {
+        (rooms as any)[dbRoom.roomId] = {
+          id: dbRoom.roomId,
+          name: dbRoom.name,
+          type: dbRoom.type,
+          labelLatitude: dbRoom.labelLatitude,
+          labelLongitude: dbRoom.labelLongitude,
+          polygon: dbRoom.polygon as unknown as GeoCoordinate[][],
+          buildingCode: dbRoom.buildingCode,
+          floorLevel: dbRoom.floorLevel,
+          aliases: dbRoom.aliases.map((alias) => alias.alias),
+          displayAlias:
+            dbRoom.aliases.find((alias) => alias.isDisplayAlias)?.alias ?? null,
+        };
+      }
+      return rooms;
+    }
   },
 };

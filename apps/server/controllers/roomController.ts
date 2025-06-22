@@ -57,4 +57,34 @@ export const roomController = {
       handleControllerError(res, error, "updating room");
     }
   },
+
+  async getRoomIdsByFloor(req: Request, res: Response) {
+    try {
+      const floorCode = req.params.floorCode;
+      const roomIds = await roomService.getRoomIds(floorCode);
+      res.json(roomIds);
+    } catch (error) {
+      handleControllerError(res, error, "getting room IDs by floor");
+    }
+  },
+
+  async getRoom(req: Request, res: Response) {
+    try {
+      const roomId = req.params.roomId;
+      const room = await roomService.getRooms(roomId);
+      res.json(room);
+    } catch (error) {
+      handleControllerError(res, error, "getting a single room");
+    }
+  },
+
+  async getAllRooms(_req: Request, res: Response) {
+    try {
+      // Calls getRooms() with no argument
+      const rooms = await roomService.getRooms();
+      res.json(rooms);
+    } catch (error) {
+      handleControllerError(res, error, "getting all rooms");
+    }
+  },
 };
