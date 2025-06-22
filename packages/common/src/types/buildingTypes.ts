@@ -3,6 +3,7 @@ import type { GeoCoordinate, PdfCoordinate } from "./coordTypes";
 export interface Building {
   code: string;
   name: string;
+  osmId: string;
   isMapped: boolean;
   defaultOrdinal: number | null;
   defaultFloor: string | null;

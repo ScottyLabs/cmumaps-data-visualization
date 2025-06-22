@@ -19,6 +19,7 @@ export const buildingService = {
       buildings[dbBuilding.buildingCode] = {
         code: dbBuilding.buildingCode,
         name: dbBuilding.name,
+        osmId: dbBuilding.osmId,
         defaultOrdinal: dbBuilding.defaultOrdinal,
         defaultFloor:
           dbBuilding.floors.find((floor) => floor.isDefault)?.floorLevel ??
