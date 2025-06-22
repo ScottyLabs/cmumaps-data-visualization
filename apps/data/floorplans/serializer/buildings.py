@@ -31,12 +31,31 @@ def buildings_serializer():
     for building in buildings:
         building_info = buildings[building]
         
-        building_dict = {}
         # populate building_dict
+        building_dict = {}
         building_dict["name"] = building_info['name']
-        building_dict["osmId"] = building_info['osm']
+        building_dict["floors"] = building_info['floors']
+        building_dict["labelPosition"] = {
+            "latitude": building_info['labelLatitude'],
+            "longitude": building_info['labelLongitude']
+        }
+        building_dict["shapes"] = building_info['shape']
+        building_dict["hitbox"] = building_info['hitbox']
+        building_dict["code"] = building_info['code']
+        if building_info['osmId']:
+            building_dict["osmId"] = building_info['osmId']
+        if building_info['defaultFloor']:
+            building_dict["defaultFloor"] = building_info['defaultFloor']
+        if building_info['defaultOrdinal']: 
+            building_dict["defaultOrdinal"] = building_info['defaultOrdinal']
         
         all_buildings_data[building] = building_dict
+    
+    # Save file           
+    with open("cmumaps-data/floorplans/buildings_serialized.json", 'w') as f:
+        json.dump(all_buildings_data, f, indent=4)
+    
+    return
     
 if __name__ == "__main__":
     buildings_serializer()
