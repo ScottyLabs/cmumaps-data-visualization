@@ -24,7 +24,7 @@ def floorplans_serializer(floor_code: str = None):
     
     # Update specific floor in floorplans_serializer.json
     if floor_code:
-        file_to_update = "cmumaps-data/floorplans/floorplans_serialized.json"
+        file_to_update = "cmumaps-data/floorplans/floorplans-serialized.json"
         roomIds_response = requests.get(
             f"{server_url}/api/rooms/by-floor/{floor_code}", 
             headers=headers
@@ -97,7 +97,7 @@ def floorplans_serializer(floor_code: str = None):
             floorplans_dict[building_code][floor_level][room] = room_dict
             
         # Create serialized json file and save
-        with open("cmumaps-data/floorplans/floorplans_serialized.json", 'w') as f:
+        with open("cmumaps-data/floorplans/floorplans-serialized.json", 'w') as f:
             json.dump(floorplans_dict, f, indent=4)
     
     return

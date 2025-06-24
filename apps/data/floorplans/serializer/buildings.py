@@ -12,7 +12,7 @@ import json
     
 def buildings_serializer():
     """
-    Fetches floor data from the server and saves it to the buildings_serialized.json
+    Fetches floor data from the server and saves it to the buildings-serialized.json
     """
     
     server_url = os.getenv("SERVER_URL")
@@ -52,7 +52,7 @@ def buildings_serializer():
         all_buildings_data[building] = building_dict
     
     # Save file           
-    with open("cmumaps-data/floorplans/buildings_serialized.json", 'w') as f:
+    with open("cmumaps-data/floorplans/buildings-serialized.json", 'w') as f:
         json.dump(all_buildings_data, f, indent=4)
     
     return
