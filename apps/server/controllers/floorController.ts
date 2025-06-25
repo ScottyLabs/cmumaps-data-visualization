@@ -58,5 +58,5 @@ export const floorController = {
     } catch (error) {
       handleControllerError(res, error, "getting floor info");
     }
-  }
+  },
 };

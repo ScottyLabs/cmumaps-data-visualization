@@ -215,5 +215,4 @@ export const floorService = {
       angle: floor.angle,
     };
   },
-
 };

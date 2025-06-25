@@ -135,31 +135,30 @@ export const roomService = {
             dbRoom.aliases.find((alias) => alias.isDisplayAlias)?.alias ?? null,
         },
       };
-    } else {
-      // If no ID is provided, get all rooms (original behavior).
-      const dbRooms = await prisma.room.findMany({
-        include: {
-          aliases: true,
-        },
-      });
-
-      const rooms = {};
-      for (const dbRoom of dbRooms) {
-        (rooms as any)[dbRoom.roomId] = {
-          id: dbRoom.roomId,
-          name: dbRoom.name,
-          type: dbRoom.type,
-          labelLatitude: dbRoom.labelLatitude,
-          labelLongitude: dbRoom.labelLongitude,
-          polygon: dbRoom.polygon as unknown as GeoCoordinate[][],
-          buildingCode: dbRoom.buildingCode,
-          floorLevel: dbRoom.floorLevel,
-          aliases: dbRoom.aliases.map((alias) => alias.alias),
-          displayAlias:
-            dbRoom.aliases.find((alias) => alias.isDisplayAlias)?.alias ?? null,
-        };
-      }
-      return rooms;
     }
+    // If no ID is provided, get all rooms (original behavior).
+    const dbRooms = await prisma.room.findMany({
+      include: {
+        aliases: true,
+      },
+    });
+
+    const rooms = {};
+    for (const dbRoom of dbRooms) {
+      (rooms as any)[dbRoom.roomId] = {
+        id: dbRoom.roomId,
+        name: dbRoom.name,
+        type: dbRoom.type,
+        labelLatitude: dbRoom.labelLatitude,
+        labelLongitude: dbRoom.labelLongitude,
+        polygon: dbRoom.polygon as unknown as GeoCoordinate[][],
+        buildingCode: dbRoom.buildingCode,
+        floorLevel: dbRoom.floorLevel,
+        aliases: dbRoom.aliases.map((alias) => alias.alias),
+        displayAlias:
+          dbRoom.aliases.find((alias) => alias.isDisplayAlias)?.alias ?? null,
+      };
+    }
+    return rooms;
   },
 };
