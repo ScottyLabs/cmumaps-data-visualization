@@ -1,0 +1,6 @@
+{
+  "name": "@cmumaps/data",
+  "scripts": {
+    "check": "ruff check"
+  }
+}
