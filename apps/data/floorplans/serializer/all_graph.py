@@ -44,7 +44,8 @@ def all_graph_serializer():
         }
         if node_info['roomId']:
             node_dict['roomId'] = node_info['roomId']
-        else: node_dict['roomId'] = ""
+        else: 
+            node_dict['roomId'] = ""
         if node_info['buildingCode']:
             node_dict['floor'] = {
                 'buildingCode': node_info['buildingCode'],

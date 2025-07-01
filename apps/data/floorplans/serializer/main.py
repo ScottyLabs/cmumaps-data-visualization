@@ -1,5 +1,4 @@
 # python floorplans/serializer/main.py <Optional file_to_serialize> <Optional floor_code>
-import os
 import sys
 from placements import placements_serializer
 from buildings import buildings_serializer

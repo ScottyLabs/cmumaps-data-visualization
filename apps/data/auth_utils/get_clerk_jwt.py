@@ -24,10 +24,10 @@ def get_clerk_jwt():
             if decoded_token["exp"] > time.time():
                 return jwt_token
         except jwt.ExpiredSignatureError:
-            print(f"token expired")
+            print("Token expired")
             pass  # Token is expired, proceed to generate a new one
         except jwt.DecodeError:
-            print(f"token invalid")
+            print("Token invalid")
             pass  # Token is invalid, proceed to generate a new one
 
     # Generate a new JWT

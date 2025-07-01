@@ -49,6 +49,7 @@
         "@clerk/clerk-react": "^5.24.1",
         "@clerk/react-router": "^1.1.2",
         "@cmumaps/common": "workspace:*",
+        "@cmumaps/websocket": "workspace:*",
         "@datastructures-js/priority-queue": "^6.3.2",
         "@reduxjs/toolkit": "^2.6.0",
         "@tailwindcss/vite": "^4.0.9",
