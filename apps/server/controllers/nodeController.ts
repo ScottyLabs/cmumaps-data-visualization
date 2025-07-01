@@ -61,4 +61,13 @@ export const nodeController = {
       handleControllerError(res, error, "updating node");
     }
   },
+
+  async getAllNodes(_req: Request, res: Response) {
+    try {
+      const nodes = await nodeService.getNodes();
+      res.json(nodes);
+    } catch (error) {
+      handleControllerError(res, error, "getting all nodes");
+    }
+  },
 };

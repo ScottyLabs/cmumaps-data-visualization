@@ -4,6 +4,7 @@ import sys
 from placements import placements_serializer
 from buildings import buildings_serializer
 from floorplans import floorplans_serializer
+from all_graph import all_graph_serializer
 
 # Create buildings.json using Building and Floor table
 # Create all-graph.json using Edge and Node table
@@ -44,4 +45,4 @@ if __name__ == "__main__":
     
     elif file_to_serialize == 'all-graph':
         all_graph_serializer()
-        print("serialized all-graph.json into all-graph-serialized.json!")    
+        print("serialized all-graph.json into all-graph-serialized.json!")
