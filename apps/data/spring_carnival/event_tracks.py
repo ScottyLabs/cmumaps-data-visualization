@@ -8,6 +8,7 @@ from tracks import drop_specified_tables
 
 prisma = Prisma()
 
+
 def get_tags(tracks):
     tags = set()
     for track in tracks:
@@ -34,6 +35,7 @@ def get_tags(tracks):
             tags.add("Health/Wellness")
     return list(tags)
 
+
 async def create_event_tracks():
     await prisma.connect()
 
@@ -49,7 +51,7 @@ async def create_event_tracks():
         if eventId not in eventId_set:
             # only create eventTracks if that eventId has not been seen before,
             # therefore making each eventTrack pair unique
-            tags = get_tags(tracks) # tags is tracks (mapping)
+            tags = get_tags(tracks)  # tags is tracks (mapping)
             for track in tags:
                 # Create EventTrack entry
                 eventTrack = {

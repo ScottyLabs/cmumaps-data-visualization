@@ -1,6 +1,8 @@
 {
   "name": "@cmumaps/data",
   "scripts": {
-    "check": "ruff check"
+    "lint": "ruff check",
+    "format": "ruff format",
+    "check": "ruff check && ruff format --diff --check"
   }
 }
