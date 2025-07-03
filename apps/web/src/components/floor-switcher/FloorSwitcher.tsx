@@ -5,6 +5,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import useLocationParams from "@/hooks/useLocationParams";
 import useBoundStore from "@/store";
 import FloorSwitcherDisplay from "./FloorSwitcherDisplay";
+import FloorSwitcherDisplayMobile from "./FloorSwitcherDisplayMobile";
 
 /**
  * This component determines if the floor switcher should be shown.
@@ -49,6 +50,15 @@ const FloorSwitcher = () => {
   const building = buildings[floor.buildingCode];
   if (!building) {
     return <></>;
+  }
+
+  if (isMobile) {
+    return (
+      <FloorSwitcherDisplayMobile
+        building={building}
+        initialFloorLevel={floor.level}
+      />
+    );
   }
 
   return (
