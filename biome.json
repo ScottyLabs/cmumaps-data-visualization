@@ -11,7 +11,8 @@
       "**",
       "!**/src/assets/**",
       "!**/cmumaps-data/**",
-      "!**/dist/**"
+      "!**/dist/**",
+      "!**/routeTree.gen.ts"
     ]
   },
   "formatter": {
