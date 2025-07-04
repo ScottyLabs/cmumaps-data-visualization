@@ -1,8 +1,13 @@
-import { ClerkLoaded, ClerkProvider } from "@clerk/clerk-react";
+import {
+  ClerkLoaded,
+  ClerkProvider,
+  RedirectToSignIn,
+  SignedIn,
+  SignedOut,
+} from "@clerk/clerk-react";
 import type { Clerk } from "@clerk/types";
 import { StrictMode } from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router";
 import "./index.css";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
@@ -36,11 +41,14 @@ declare module "@tanstack/react-router" {
 const AppContent = () => (
   <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
     <ClerkLoaded>
-      <BrowserRouter>
-        <Provider store={store}>
+      <Provider store={store}>
+        <SignedIn>
           <RouterProvider router={router} />
-        </Provider>
-      </BrowserRouter>
+        </SignedIn>
+        <SignedOut>
+          <RedirectToSignIn />
+        </SignedOut>
+      </Provider>
     </ClerkLoaded>
   </ClerkProvider>
 );
