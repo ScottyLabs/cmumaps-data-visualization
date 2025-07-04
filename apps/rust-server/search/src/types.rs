@@ -7,14 +7,14 @@ use std::cmp::Ordering;
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(untagged)]
 pub enum Document {
-    Room(RoomDocument),
+    Room(RoomDocument), 
     Carnival(CarnivalDocument),
     Course(CourseDocument),
-}
+} 
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct SearchParams {
-    pub query: String,
+pub struct SearchParams { 
+    pub query: String, 
     pub n: Option<usize>,
     pub pos: Option<Coordinate>,
 }

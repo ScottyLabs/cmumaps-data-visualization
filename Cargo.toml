@@ -1,5 +1,7 @@
 # my_workspace/Cargo.toml
 [workspace]
 members = [
-    "apps/rust-server/"
+    "apps/rust-server/search",
+    "apps/rust-server/server",
+    "apps/rust-server/path",
 ]

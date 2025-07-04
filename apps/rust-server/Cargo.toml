@@ -1,7 +1,0 @@
-# my_workspace/Cargo.toml
-[workspace]
-members = [
-    "search",
-    "path",
-    "server"
-]

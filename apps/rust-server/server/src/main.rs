@@ -1,6 +1,7 @@
 use std::sync::Arc;
 
 use axum::http::Method;
+use path::graph;
 use tower_http::cors::{Any, CorsLayer};
 
 use axum::{
@@ -27,10 +28,21 @@ async fn main() {
     let docs_path = format!("{}/documents.json", data_path);
     let index_path = format!("{}/search_index.json", data_path);
 
+    let graph_path = format!("{}/floorplans/all-graph.json", data_path);
+    let buildings_path = format!("{}/floorplans/buildings.json", data_path);
+
+    let graph: path::types::Graph = path::types::parse_json(graph_path);
+    let buildings: path::types::Buildings = path::types::parse_json(buildings_path);
+
     // add state
-    let app_state = search::types::AppState {
+    let path_state: path::types::AppState = path::types::AppState {
+        graph: Arc::new(graph),
+        buildings: Arc::new(buildings)
+    };
+
+    let search_state: search::types::AppState = search::types::AppState {
+        index: Arc::new(index),
         docs: Arc::new(documents),
-        index: Arc::new(index)
     };
 
     // init cors middleware
@@ -38,15 +50,22 @@ async fn main() {
         .allow_methods([Method::GET, Method::POST])
         .allow_origin(Any);
 
-    println!("Loaded {} documents", app_state.docs.len());
+    println!("Loaded {} documents", search_state.docs.len());
+
+    let path_routes = Router::new()
+        .route("/path", get(path::path))
+        .with_state(path_state);
+
+    let search_routes = Router::new()
+        .route("/search", get(search::search))
+        .with_state(search_state);
 
     // build our application with a single route
     let app = Router::new()
         .route("/", get(|| async { "Hello, World!" }))
-        .route("/search", get(search::search))
-        .route("/path", get(path::path))
-        .layer(cors)
-        .with_state(app_state);
+        .merge(path_routes)
+        .merge(search_routes)
+        .layer(cors);
 
     // run our app with hyper, listening globally on port FAST = 3278
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3278").await.unwrap();
