@@ -1,4 +1,4 @@
-import { SignedIn, UserButton } from "@clerk/clerk-react";
+import { UserButton } from "@clerk/clerk-react";
 import { ERROR_CODES } from "@cmumaps/common";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { zodValidator } from "@tanstack/zod-adapter";
@@ -37,33 +37,23 @@ function Index() {
     return <ErrorDisplay errorText="Failed to fetch building codes" />;
   }
 
-  const renderTopBar = () => (
-    <header className="m-2 flex flex-row-reverse">
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-    </header>
-  );
-
-  const renderBuildingLinks = () => (
-    <div className="m-5 flex flex-wrap gap-8">
-      {buildingCodesAndNames.map(({ buildingCode, name }) => (
-        <Link
-          to={"/floors/$floorCode"}
-          params={{ floorCode: buildingCode }}
-          key={buildingCode}
-          className="cursor-pointer rounded-lg border border-gray-300 p-4 shadow-md transition duration-200 ease-in-out hover:scale-105 hover:shadow-lg"
-        >
-          {name}
-        </Link>
-      ))}
-    </div>
-  );
-
   return (
     <div>
-      {renderTopBar()}
-      {renderBuildingLinks()}
+      <header className="m-2 flex flex-row-reverse">
+        <UserButton />
+      </header>
+      <div className="m-5 flex flex-wrap gap-8">
+        {buildingCodesAndNames.map(({ buildingCode, name }) => (
+          <Link
+            to={"/buildings/$buildingCode"}
+            params={{ buildingCode }}
+            key={buildingCode}
+            className="cursor-pointer rounded-lg border border-gray-300 p-4 shadow-md transition duration-200 ease-in-out hover:scale-105 hover:shadow-lg"
+          >
+            {name}
+          </Link>
+        ))}
+      </div>
       <MyToastContainer errorCode={errorCode} />
     </div>
   );
