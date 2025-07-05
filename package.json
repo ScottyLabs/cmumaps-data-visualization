@@ -14,6 +14,7 @@
     "dev:web": "turbo dev --filter=@cmumaps/web --filter=@cmumaps/server --filter=@cmumaps/rust-server --parallel",
     "dev:web:host": "turbo dev:host --filter=@cmumaps/web --filter=@cmumaps/server --filter=@cmumaps/rust-server --parallel",
     "dev:visualizer": "turbo dev --filter=@cmumaps/visualizer --filter=@cmumaps/server --parallel",
+    "dev:visualizer:full": "turbo dev --filter=@cmumaps/visualizer --filter=@cmumaps/server --filter=@cmumaps/rust-server --parallel",
     "dev:server": "turbo dev --filter=@cmumaps/server --parallel",
     "dev:rust-server": "turbo dev --filter=@cmumaps/rust-server --parallel",
     "db-generate": "turbo run db-generate --filter=@cmumaps/server",
