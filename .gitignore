@@ -9,6 +9,7 @@ __pycache__/
 
 # Build
 dist/
+build/
 
 # Rust
 target/
