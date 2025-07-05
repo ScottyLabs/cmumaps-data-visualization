@@ -19,6 +19,7 @@
     "@datastructures-js/priority-queue": "^6.3.2",
     "@reduxjs/toolkit": "^2.6.0",
     "@tailwindcss/vite": "^4.0.9",
+    "@tanstack/react-query": "^5.81.5",
     "@tanstack/react-router": "^1.124.0",
     "@tanstack/react-router-devtools": "^1.124.0",
     "@tanstack/zod-adapter": "^1.124.0",

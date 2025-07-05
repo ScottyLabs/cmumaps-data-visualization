@@ -4,6 +4,7 @@ import { z } from "zod";
 // variables and their types
 const envSchema = z.object({
   VITE_SERVER_URL: z.string().url(),
+  VITE_RUST_SERVER_URL: z.string().url(),
   VITE_AWS_API_INVOKE_URL: z.string().url(),
   VITE_CLERK_PUBLISHABLE_KEY: z.string(),
 });

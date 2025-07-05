@@ -9,6 +9,7 @@ import type { Clerk } from "@clerk/types";
 import { StrictMode } from "react";
 import { Provider } from "react-redux";
 import "./index.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
 import env from "./env";
@@ -23,10 +24,8 @@ declare global {
   }
 }
 
-const PUBLISHABLE_KEY = env.VITE_CLERK_PUBLISHABLE_KEY;
-if (!PUBLISHABLE_KEY) {
-  throw new Error("Add your Clerk Publishable Key to the .env file");
-}
+// Create a query client
+const queryClient = new QueryClient();
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -39,12 +38,17 @@ declare module "@tanstack/react-router" {
 }
 
 const AppContent = () => (
-  <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+  <ClerkProvider
+    publishableKey={env.VITE_CLERK_PUBLISHABLE_KEY}
+    afterSignOutUrl="/"
+  >
     <ClerkLoaded>
       <Provider store={store}>
-        <SignedIn>
-          <RouterProvider router={router} />
-        </SignedIn>
+        <QueryClientProvider client={queryClient}>
+          <SignedIn>
+            <RouterProvider router={router} />
+          </SignedIn>
+        </QueryClientProvider>
         <SignedOut>
           <RedirectToSignIn />
         </SignedOut>
