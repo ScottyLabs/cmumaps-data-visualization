@@ -1,4 +1,5 @@
 import {
+  type BuildingMetadata,
   type Buildings,
   ERROR_CODES,
   type GeoCoordinate,
@@ -8,7 +9,7 @@ import { BuildingError } from "../errors/error";
 import { prisma } from "../prisma";
 
 export const buildingService = {
-  async getBuildings() {
+  async getBuildings(): Promise<Buildings> {
     // get all buildings and their floors and default floor
     const dbBuildings = await prisma.building.findMany({
       include: { floors: true },
@@ -37,12 +38,12 @@ export const buildingService = {
     return buildings;
   },
 
-  async getBuildingsMetadata() {
+  async getBuildingsMetadata(): Promise<BuildingMetadata[]> {
     const buildings = await prisma.building.findMany({
       select: {
         buildingCode: true,
         name: true,
-        floors: { select: { isDefault: true } },
+        floors: { select: { isDefault: true, floorLevel: true } },
       },
     });
     return buildings
@@ -51,7 +52,9 @@ export const buildingService = {
         return {
           buildingCode: building.buildingCode,
           name: building.name,
-          isMapped: building.floors.some((floor) => floor.isDefault),
+          defaultFloor:
+            building.floors.find((floor) => floor.isDefault)?.floorLevel ??
+            null,
         };
       });
   },

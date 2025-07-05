@@ -1,10 +1,5 @@
+import type { BuildingMetadata } from "@cmumaps/common";
 import { apiSlice } from "./apiSlice";
-
-type BuildingMetadata = {
-  buildingCode: string;
-  name: string;
-  isMapped: boolean;
-};
 
 export const buildingApiSlice = apiSlice.injectEndpoints({
   overrideExisting: true,
