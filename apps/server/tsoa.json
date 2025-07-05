@@ -1,5 +1,5 @@
 {
-  "entryFile": "src/app.ts",
+  "entryFile": "index.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": ["src/**/*Controller.ts"],
   "spec": {

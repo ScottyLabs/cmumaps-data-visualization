@@ -1,7 +1,6 @@
 import type { Request, Response } from "express";
-
+import { webSocketService } from "../../index";
 import { handleControllerError } from "../errors/errorHandler";
-import { webSocketService } from "../index";
 import { poiService } from "../services/poiService";
 
 export const poiController = {

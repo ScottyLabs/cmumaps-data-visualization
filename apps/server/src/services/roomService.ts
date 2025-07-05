@@ -6,7 +6,7 @@ import {
 } from "@cmumaps/common";
 
 import type { InputJsonValue } from "@prisma/client/runtime/library";
-import { prisma } from "../prisma";
+import { prisma } from "../../prisma";
 import {
   pdfCoordsToGeoCoords,
   pdfPolygonToGeoPolygon,

@@ -1,7 +1,6 @@
 import type { Request, Response } from "express";
-
+import { webSocketService } from "../../index";
 import { handleControllerError } from "../errors/errorHandler";
-import { webSocketService } from "../index";
 import { floorService } from "../services/floorService";
 import { roomService } from "../services/roomService";
 

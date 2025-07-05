@@ -1,5 +1,5 @@
 // biome-ignore-all lint/suspicious/noExplicitAny: <Necessary>
-import { prisma } from "../prisma";
+import { prisma } from "../../prisma";
 
 export const populateTableService = {
   populateBuildings: async (data: any) => {

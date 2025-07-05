@@ -3,20 +3,19 @@ import { clerkMiddleware } from "@clerk/express";
 import cors from "cors";
 import express from "express";
 import { Server } from "socket.io";
-
-import { checkAuth, socketAuth } from "./middleware/authMiddleware";
-import { notFoundHandler } from "./middleware/notFoundHandler";
-import { requireSocketId } from "./middleware/socketIdMiddleware";
 import { prisma } from "./prisma";
-import buildingRoutes from "./routes/buildingRoutes";
-import dropTablesRoutes from "./routes/dropTablesRoutes";
-import edgeRoutes from "./routes/edgeRoutes";
-import floorRoutes from "./routes/floorRoutes";
-import nodeRoutes from "./routes/nodeRoutes";
-import poiRoutes from "./routes/poiRoutes";
-import populateTableRoutes from "./routes/populateTableRoutes";
-import roomRoutes from "./routes/roomRoutes";
-import { WebSocketService } from "./services/webSocketService";
+import { checkAuth, socketAuth } from "./src/middleware/authMiddleware";
+import { notFoundHandler } from "./src/middleware/notFoundHandler";
+import { requireSocketId } from "./src/middleware/socketIdMiddleware";
+import buildingRoutes from "./src/routes/buildingRoutes";
+import dropTablesRoutes from "./src/routes/dropTablesRoutes";
+import edgeRoutes from "./src/routes/edgeRoutes";
+import floorRoutes from "./src/routes/floorRoutes";
+import nodeRoutes from "./src/routes/nodeRoutes";
+import poiRoutes from "./src/routes/poiRoutes";
+import populateTableRoutes from "./src/routes/populateTableRoutes";
+import roomRoutes from "./src/routes/roomRoutes";
+import { WebSocketService } from "./src/services/webSocketService";
 
 const app = express();
 const corsOptions = {
