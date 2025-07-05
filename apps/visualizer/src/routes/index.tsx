@@ -7,7 +7,6 @@ import ErrorDisplay from "../components/shared/ErrorDisplay";
 import Loader from "../components/shared/Loader";
 import MyToastContainer from "../components/shared/MyToastContainer";
 import useWebSocket from "../hooks/useWebSocket";
-import $rapi from "../lib/client";
 import { useGetBuildingsMetadataQuery } from "../store/api/buildingApiSlice";
 
 const indexSearchSchema = z.object({
@@ -28,12 +27,6 @@ function Index() {
     isError,
   } = useGetBuildingsMetadataQuery();
   const errorCode = Route.useSearch().errorCode;
-
-  const { data: searchResults } = $rapi.useQuery("get", "/search", {
-    params: { query: { query: "CUC" } },
-  });
-
-  console.log(searchResults);
 
   if (isLoading) {
     return <Loader loadingText="Fetching building codes" />;
