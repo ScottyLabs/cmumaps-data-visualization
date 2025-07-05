@@ -1,8 +1,6 @@
 import { getRoomTypeDetails, type Polygon, type Rooms } from "@cmumaps/common";
-
+import { useNavigate } from "@tanstack/react-router";
 import { Path } from "react-konva";
-import { useNavigate } from "react-router";
-
 import { useAppSelector } from "../../store/hooks";
 
 interface Props {
@@ -10,7 +8,7 @@ interface Props {
 }
 
 const PolygonsDisplay = ({ rooms }: Props) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate({ from: "/floors/$floorCode" });
   const showPolygons = useAppSelector((state) => state.visibility.showPolygons);
   const nodeSize = useAppSelector((state) => state.ui.nodeSize);
 
@@ -59,7 +57,7 @@ const PolygonsDisplay = ({ rooms }: Props) => {
         strokeWidth={nodeSize / 2}
         closed
         fill={roomColor.background}
-        onClick={() => navigate(`?roomId=${roomId}`)}
+        onClick={() => navigate({ to: ".", search: { roomId } })}
       />
     );
   });

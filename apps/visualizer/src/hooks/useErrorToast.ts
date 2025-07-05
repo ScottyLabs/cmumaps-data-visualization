@@ -15,7 +15,7 @@ const useErrorToast = (errorCode?: ErrorCode) => {
   useEffect(() => {
     if (!errorCode) return;
     toast.error(getErrorMessage(errorCode));
-    navigate({ to: "/", replace: true });
+    navigate({ to: ".", search: {}, replace: true });
   }, [errorCode, navigate]);
 };
 

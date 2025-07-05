@@ -1,11 +1,10 @@
 import type { Graph, RoomInfo, Rooms } from "@cmumaps/common";
+import { useNavigate } from "@tanstack/react-router";
 import type Konva from "konva";
 import { useMemo } from "react";
 import { TfiLocationPin } from "react-icons/tfi";
 import { Group, Path, Rect, Text } from "react-konva";
-import { useNavigate } from "react-router";
 import { v4 as uuidv4 } from "uuid";
-
 import useValidatedFloorParams from "../../hooks/useValidatedFloorParams";
 import { useUpdateRoomMutation } from "../../store/api/roomApiSlice";
 import { useAppSelector } from "../../store/hooks";
@@ -18,7 +17,7 @@ interface Props {
 }
 
 const LabelsDisplay = ({ floorCode, rooms }: Props) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate({ from: "/floors/$floorCode" });
   const { roomId: selectedRoomId } = useValidatedFloorParams(floorCode);
 
   const [updateRoom] = useUpdateRoomMutation();
@@ -72,7 +71,7 @@ const LabelsDisplay = ({ floorCode, rooms }: Props) => {
         key={roomId}
         onMouseEnter={(e) => setCursor(e, "pointer")}
         onMouseLeave={(e) => setCursor(e, "default")}
-        onClick={() => navigate(`?roomId=${roomId}`)}
+        onClick={() => navigate({ to: ".", search: { roomId } })}
         draggable={draggable}
         onDragEnd={handleOnDragEnd}
       >

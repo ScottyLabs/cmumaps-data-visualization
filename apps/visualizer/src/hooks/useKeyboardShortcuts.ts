@@ -1,9 +1,8 @@
 import type { Graph, Rooms } from "@cmumaps/common";
+import { useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-
 import { useInvalidateCacheMutation } from "../store/api/floorDataApiSlice";
 import { useDeleteNodeMutation } from "../store/api/nodeApiSlice";
 import { redo, undo } from "../store/features/history/historyThunks";
@@ -36,7 +35,7 @@ const useKeyboardShortcuts = (
   rooms: Rooms,
 ) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const navigate = useNavigate({ from: "/floors/$floorCode" });
 
   const [invalidateCache] = useInvalidateCacheMutation();
   const [deleteNode] = useDeleteNodeMutation();
@@ -140,7 +139,7 @@ const useKeyboardShortcuts = (
           case "Backspace":
           case "Delete": {
             if (selectedNodeId) {
-              navigate("?");
+              navigate({ to: ".", search: {}, replace: true });
               deleteNode({
                 floorCode,
                 batchId: uuidv4(),

@@ -1,7 +1,6 @@
+import { useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-
 import useValidatedFloorParams from "../../hooks/useValidatedFloorParams";
 import useWebSocket from "../../hooks/useWebSocket";
 import {
@@ -28,7 +27,7 @@ const MainDisplay = ({ floorCode }: Props) => {
   useEffect(() => {
     if ("error" in result) {
       toast.error(result.error);
-      navigate("?");
+      navigate({ to: ".", search: {}, replace: true });
     }
   }, [navigate, result]);
 

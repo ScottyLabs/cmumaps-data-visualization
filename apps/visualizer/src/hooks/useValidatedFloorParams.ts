@@ -1,7 +1,6 @@
+import { useSearch } from "@tanstack/react-router";
 import { useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { useSearchParams } from "react-router";
-
 import {
   useGetFloorGraphQuery,
   useGetFloorPoisQuery,
@@ -27,10 +26,7 @@ const useValidatedFloorParams = (floorCode: string): FloorParamsResult => {
   const { data: rooms } = useGetFloorRoomsQuery(floorCode);
   const { data: pois } = useGetFloorPoisQuery(floorCode);
 
-  const [searchParam] = useSearchParams();
-  const nodeId = searchParam.get("nodeId");
-  const roomId = searchParam.get("roomId");
-  const poiId = searchParam.get("poiId");
+  const { nodeId, roomId, poiId } = useSearch({ from: "/floors/$floorCode" });
 
   // set the active tab index based on the query params
   // not for node id since it is how user change url param after the initial load

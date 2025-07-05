@@ -1,7 +1,6 @@
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
-import { NavLink } from "react-router";
-
 import useFloorInfo from "../../hooks/useFloorInfo";
 import { useGetBuildingFloorsQuery } from "../../store/api/buildingApiSlice";
 
@@ -23,8 +22,9 @@ const FloorSwitcher = ({ floorCode }: Props) => {
   const renderFullDisplayMode = () =>
     floorLevels.map((floorLevel) => (
       <td key={floorLevel} className="border border-black">
-        <NavLink
-          to={`/${buildingCode}-${floorLevel}`}
+        <Link
+          to="/floors/$floorCode"
+          params={{ floorCode: `${buildingCode}-${floorLevel}` }}
           className={`cursor-pointer px-4 ${floorLevel === floorLevelSelected ? "font-bold" : ""}`}
           onClick={() => {
             // exit full display mode in case clicking on the same floor level
@@ -33,7 +33,7 @@ const FloorSwitcher = ({ floorCode }: Props) => {
         >
           {" "}
           {floorLevel}
-        </NavLink>
+        </Link>
       </td>
     ));
 
@@ -43,12 +43,13 @@ const FloorSwitcher = ({ floorCode }: Props) => {
     const renderDownArrow = () => (
       <td className="border-black border-x">
         {index !== 0 ? (
-          <NavLink
-            to={`/${buildingCode}-${floorLevels[index - 1]}`}
+          <Link
+            to="/floors/$floorCode"
+            params={{ floorCode: `${buildingCode}-${floorLevels[index - 1]}` }}
             className="flex h-full w-full cursor-pointer items-center p-1"
           >
             <FaArrowDown />
-          </NavLink>
+          </Link>
         ) : (
           <div className="flex h-full w-full items-center p-1 text-gray-400">
             <FaArrowDown />
@@ -80,12 +81,13 @@ const FloorSwitcher = ({ floorCode }: Props) => {
     const renderUpArrow = () => (
       <td className="border-black border-l">
         {index !== floorLevels.length - 1 ? (
-          <NavLink
-            to={`/${buildingCode}-${floorLevels[index + 1]}`}
+          <Link
+            to="/floors/$floorCode"
+            params={{ floorCode: `${buildingCode}-${floorLevels[index + 1]}` }}
             className="flex h-full w-full cursor-pointer items-center p-1"
           >
             <FaArrowUp />
-          </NavLink>
+          </Link>
         ) : (
           <div className="flex h-full w-full items-center p-1 text-gray-400">
             <FaArrowUp />

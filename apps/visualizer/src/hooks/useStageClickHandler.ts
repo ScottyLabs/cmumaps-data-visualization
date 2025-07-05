@@ -1,9 +1,8 @@
 import type { NodeInfo, PdfCoordinate, Polygon, Rooms } from "@cmumaps/common";
+import { useNavigate } from "@tanstack/react-router";
 import type Konva from "konva";
-import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-
 import { useCreateEdgeMutation } from "../store/api/edgeApiSlice";
 import { useCreateNodeMutation } from "../store/api/nodeApiSlice";
 import {
@@ -33,7 +32,7 @@ const useStageClickHandler = (
   offset: PdfCoordinate,
 ) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const navigate = useNavigate({ from: "/floors/$floorCode" });
 
   const [createNode] = useCreateNodeMutation();
   const [createEdge] = useCreateEdgeMutation();
@@ -67,7 +66,7 @@ const useStageClickHandler = (
       }
 
       dispatch(setMode(GRAPH_SELECT));
-      navigate(`?nodeId=${nodeId}`);
+      navigate({ to: ".", search: { nodeId } });
     });
   };
 
@@ -111,7 +110,7 @@ const useStageClickHandler = (
   };
 
   const handleDeselect = () => {
-    navigate("?");
+    navigate({ to: ".", search: {} });
     dispatch(setShowRoomSpecific(false));
     dispatch(setEditRoomLabel(false));
     dispatch(setMode(GRAPH_SELECT));

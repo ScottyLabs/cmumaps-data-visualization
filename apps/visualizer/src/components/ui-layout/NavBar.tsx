@@ -1,7 +1,5 @@
 import { extractBuildingCode } from "@cmumaps/common";
-
-import { NavLink } from "react-router";
-
+import { Link } from "@tanstack/react-router";
 import { useGetBuildingNameQuery } from "../../store/api/buildingApiSlice";
 
 interface Props {
@@ -21,12 +19,12 @@ const NavBar = ({ floorCode }: Props) => {
         <div className="-translate-x-1/2 fixed top-4 left-1/2 h-7 text-white text-xl">
           {name ? name : ""}
         </div>
-        <NavLink
+        <Link
           to="/"
           className="mr-2 cursor-pointer text-lg text-white hover:text-gray-400"
         >
           Back
-        </NavLink>
+        </Link>
       </div>
     </nav>
   );

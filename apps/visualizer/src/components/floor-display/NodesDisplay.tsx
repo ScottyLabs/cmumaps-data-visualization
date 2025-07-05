@@ -6,11 +6,11 @@ import {
   type Rooms,
   ValidCrossFloorEdgeTypes,
 } from "@cmumaps/common";
+import { useNavigate } from "@tanstack/react-router";
 import type Konva from "konva";
 import { throttle } from "lodash";
 import { useMemo } from "react";
 import { Circle } from "react-konva";
-import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 
@@ -62,7 +62,7 @@ const NodesDisplay = ({
   scale,
 }: Props) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const navigate = useNavigate({ from: "/floors/$floorCode" });
 
   const [updateNode] = useUpdateNodeMutation();
   const [createEdge] = useCreateEdgeMutation();
@@ -196,7 +196,7 @@ const NodesDisplay = ({
 
   const handleNodeClick = (nodeId: string) => {
     if (mode === GRAPH_SELECT) {
-      navigate(`?nodeId=${nodeId}`);
+      navigate({ to: ".", search: { nodeId } });
     } else if (mode === ADD_EDGE) {
       handleAddEdge(nodeId);
     } else if (mode === DELETE_EDGE) {

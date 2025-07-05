@@ -1,7 +1,7 @@
 import type { Graph, Rooms } from "@cmumaps/common";
+import { useNavigate } from "@tanstack/react-router";
 
 import { BiHide } from "react-icons/bi";
-import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 import { setMst } from "../../store/features/dataSlice";
@@ -23,7 +23,7 @@ interface Props {
 }
 
 const GraphTab = ({ graph, rooms }: Props) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate({ from: "/floors/$floorCode" });
   const dispatch = useAppDispatch();
 
   const renderAddNodeButtonsRow = () => (

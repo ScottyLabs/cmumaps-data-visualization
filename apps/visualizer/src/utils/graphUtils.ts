@@ -1,9 +1,7 @@
 import type { Graph, Mst, Rooms } from "@cmumaps/common";
 import { PriorityQueue } from "@datastructures-js/priority-queue";
-
-import type { NavigateFunction } from "react-router";
+import type { useNavigate } from "@tanstack/react-router";
 import { toast } from "react-toastify";
-
 import { setMst } from "../store/features/dataSlice";
 import type { AppDispatch } from "../store/store";
 import { dist } from "./geometryUtils";
@@ -12,7 +10,7 @@ import { dist } from "./geometryUtils";
 export const calcMst = (
   graph: Graph,
   rooms: Rooms,
-  navigate: NavigateFunction,
+  navigate: ReturnType<typeof useNavigate>,
   dispatch: AppDispatch,
 ) => {
   // MST is a set of edges (inNodeId, outNodeId)
@@ -96,7 +94,7 @@ export const calcMst = (
 
   if (nodeNotInMst) {
     toast.error("MST not complete!");
-    navigate(`?nodeId=${nodeNotInMst}`);
+    navigate({ to: ".", search: { nodeId: nodeNotInMst } });
   } else {
     toast.success("Found MST!");
   }

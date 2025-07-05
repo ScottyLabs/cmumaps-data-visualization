@@ -1,8 +1,6 @@
 import type { EdgeInfo } from "@cmumaps/common";
-import { NavLink } from "react-router";
-import { toast } from "react-toastify";
+import { Link } from "@tanstack/react-router";
 import { v4 as uuidv4 } from "uuid";
-
 import { useDeleteEdgeAcrossFloorsMutation } from "../../../store/api/edgeApiSlice";
 import TableCell from "../shared/TableCell";
 
@@ -42,28 +40,21 @@ const DifferentFloorNeighborTable = ({
   const renderDifferentFloorNeighbors = (
     differentFloorNeighbors: Record<string, EdgeInfo>,
   ) => {
-    const calculatePath = (neighborId: string) => {
-      const outFloorCode = neighbors[neighborId].outFloorCode;
-
-      // all nodes in differentFloorNeighbors should have outFloorCode
-      if (outFloorCode) {
-        return `/${outFloorCode}?nodeId=${neighborId}`;
-      }
-
-      toast.error("This is not a different floor neighbor");
-      return `/${floorCode}?nodeId=${nodeId}`;
-    };
-
     return Object.entries(differentFloorNeighbors).map(
       ([neighborId, neighbor]) => (
         <tr key={neighborId}>
           <td className="border p-2">
-            <NavLink
+            <Link
               className="whitespace-nowrap border px-1 hover:bg-sky-700"
-              to={calculatePath(neighborId)}
+              to="/floors/$floorCode"
+              params={{
+                // all nodes in differentFloorNeighbors should have outFloorCode
+                floorCode: neighbors[neighborId].outFloorCode as string,
+              }}
+              search={{ nodeId: neighborId }}
             >
               {neighbor.outFloorCode}
-            </NavLink>
+            </Link>
           </td>
           <td className="border p-2">
             <button
