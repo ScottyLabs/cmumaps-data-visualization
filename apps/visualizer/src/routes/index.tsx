@@ -1,13 +1,21 @@
 import { SignedIn, UserButton } from "@clerk/clerk-react";
-import { createFileRoute } from "@tanstack/react-router";
-import { NavLink } from "react-router";
+import { ERROR_CODES } from "@cmumaps/common";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { zodValidator } from "@tanstack/zod-adapter";
+import { z } from "zod";
 import ErrorDisplay from "../components/shared/ErrorDisplay";
 import Loader from "../components/shared/Loader";
 import MyToastContainer from "../components/shared/MyToastContainer";
 import useWebSocket from "../hooks/useWebSocket";
+
 import { useGetBuildingCodesAndNamesQuery } from "../store/api/buildingApiSlice";
 
+const indexSearchSchema = z.object({
+  errorCode: z.nativeEnum(ERROR_CODES).optional(),
+});
+
 export const Route = createFileRoute("/")({
+  validateSearch: zodValidator(indexSearchSchema),
   component: Index,
 });
 
@@ -19,6 +27,7 @@ function Index() {
     isLoading,
     isError,
   } = useGetBuildingCodesAndNamesQuery();
+  const errorCode = Route.useSearch().errorCode;
 
   if (isLoading) {
     return <Loader loadingText="Fetching building codes" />;
@@ -39,13 +48,14 @@ function Index() {
   const renderBuildingLinks = () => (
     <div className="m-5 flex flex-wrap gap-8">
       {buildingCodesAndNames.map(({ buildingCode, name }) => (
-        <NavLink
-          to={`/${buildingCode}`}
+        <Link
+          to={"/floors/$floorCode"}
+          params={{ floorCode: buildingCode }}
           key={buildingCode}
           className="cursor-pointer rounded-lg border border-gray-300 p-4 shadow-md transition duration-200 ease-in-out hover:scale-105 hover:shadow-lg"
         >
           {name}
-        </NavLink>
+        </Link>
       ))}
     </div>
   );
@@ -54,7 +64,7 @@ function Index() {
     <div>
       {renderTopBar()}
       {renderBuildingLinks()}
-      <MyToastContainer />
+      <MyToastContainer errorCode={errorCode} />
     </div>
   );
 }

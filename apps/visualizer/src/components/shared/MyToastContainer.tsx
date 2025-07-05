@@ -1,9 +1,14 @@
+import type { ErrorCode } from "@cmumaps/common";
 import { Slide, ToastContainer } from "react-toastify";
 
 import useErrorToast from "../../hooks/useErrorToast";
 
-const MyToastContainer = () => {
-  useErrorToast();
+interface Props {
+  errorCode?: ErrorCode;
+}
+
+const MyToastContainer = ({ errorCode }: Props) => {
+  useErrorToast(errorCode);
 
   return (
     <ToastContainer

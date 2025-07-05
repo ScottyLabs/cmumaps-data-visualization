@@ -21,6 +21,7 @@
     "@tailwindcss/vite": "^4.0.9",
     "@tanstack/react-router": "^1.124.0",
     "@tanstack/react-router-devtools": "^1.124.0",
+    "@tanstack/zod-adapter": "^1.124.0",
     "@turf/simplify": "^7.2.0",
     "@turf/turf": "^7.2.0",
     "geojson": "^0.5.0",
@@ -39,7 +40,7 @@
     "tailwind-merge": "^3.0.2",
     "tailwindcss": "^4.0.9",
     "uuid": "^11.1.0",
-    "zod": "^3.25.67"
+    "zod": "^3.25.74"
   },
   "devDependencies": {
     "@clerk/types": "^4.47.0",
