@@ -12,7 +12,8 @@
       "!**/src/assets/**",
       "!**/cmumaps-data/**",
       "!**/dist/**",
-      "!**/routeTree.gen.ts"
+      "!**/routeTree.gen.ts",
+      "!**/openapi.d.ts"
     ]
   },
   "formatter": {
