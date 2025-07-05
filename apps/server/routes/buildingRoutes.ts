@@ -8,9 +8,9 @@ const buildingRouter = express.Router();
 buildingRouter.get("/", buildingController.getBuildings);
 
 buildingRouter.get(
-  "/codes-and-names",
+  "/metadata",
   checkAuth,
-  buildingController.getBuildingCodesAndNames,
+  buildingController.getBuildingsMetadata,
 );
 buildingRouter.get("/:id/name", checkAuth, buildingController.getBuildingName);
 buildingRouter.get(

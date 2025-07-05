@@ -8,7 +8,7 @@ import Loader from "../components/shared/Loader";
 import MyToastContainer from "../components/shared/MyToastContainer";
 import useWebSocket from "../hooks/useWebSocket";
 
-import { useGetBuildingCodesAndNamesQuery } from "../store/api/buildingApiSlice";
+import { useGetBuildingsMetadataQuery } from "../store/api/buildingApiSlice";
 
 const indexSearchSchema = z.object({
   errorCode: z.nativeEnum(ERROR_CODES).optional(),
@@ -23,39 +23,45 @@ function Index() {
   useWebSocket();
 
   const {
-    data: buildingCodesAndNames,
+    data: buildingsMetadata,
     isLoading,
     isError,
-  } = useGetBuildingCodesAndNamesQuery();
+  } = useGetBuildingsMetadataQuery();
   const errorCode = Route.useSearch().errorCode;
 
   if (isLoading) {
     return <Loader loadingText="Fetching building codes" />;
   }
 
-  if (isError || !buildingCodesAndNames) {
+  if (isError || !buildingsMetadata) {
     return <ErrorDisplay errorText="Failed to fetch building codes" />;
   }
 
+  const renderBuildingList = () => (
+    <div className="m-5 flex flex-wrap gap-8">
+      {buildingsMetadata.map(({ buildingCode, name, isMapped }) => (
+        <Link
+          to={"/buildings/$buildingCode"}
+          params={{ buildingCode }}
+          key={buildingCode}
+          className={`cursor-pointer rounded-lg border border-gray-300 p-4 shadow-md transition duration-200 ease-in-out hover:scale-105 hover:shadow-lg ${
+            isMapped ? "bg-gray-100" : "bg-gray-300"
+          }`}
+        >
+          {name}
+        </Link>
+      ))}
+    </div>
+  );
+
   return (
-    <div>
+    <>
       <header className="m-2 flex flex-row-reverse">
         <UserButton />
       </header>
-      <div className="m-5 flex flex-wrap gap-8">
-        {buildingCodesAndNames.map(({ buildingCode, name }) => (
-          <Link
-            to={"/buildings/$buildingCode"}
-            params={{ buildingCode }}
-            key={buildingCode}
-            className="cursor-pointer rounded-lg border border-gray-300 p-4 shadow-md transition duration-200 ease-in-out hover:scale-105 hover:shadow-lg"
-          >
-            {name}
-          </Link>
-        ))}
-      </div>
+      {renderBuildingList()}
       <MyToastContainer errorCode={errorCode} />
-    </div>
+    </>
   );
 }
 

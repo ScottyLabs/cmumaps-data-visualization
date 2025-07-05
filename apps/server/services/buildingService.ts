@@ -37,11 +37,23 @@ export const buildingService = {
     return buildings;
   },
 
-  async getAllBuildingCodesAndNames() {
+  async getBuildingsMetadata() {
     const buildings = await prisma.building.findMany({
-      select: { buildingCode: true, name: true },
+      select: {
+        buildingCode: true,
+        name: true,
+        floors: { select: { isDefault: true } },
+      },
     });
-    return buildings.sort((a, b) => a.name.localeCompare(b.name));
+    return buildings
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((building) => {
+        return {
+          buildingCode: building.buildingCode,
+          name: building.name,
+          isMapped: building.floors.some((floor) => floor.isDefault),
+        };
+      });
   },
 
   async getBuildingName(buildingCode: string) {

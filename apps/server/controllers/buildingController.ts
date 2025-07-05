@@ -14,14 +14,12 @@ export const buildingController = {
     }
   },
 
-  async getBuildingCodesAndNames(_req: Request, res: Response) {
+  async getBuildingsMetadata(_req: Request, res: Response) {
     try {
-      const buildingCodesAndNames =
-        await buildingService.getAllBuildingCodesAndNames();
-
-      res.json(buildingCodesAndNames);
+      const buildingMetadata = await buildingService.getBuildingsMetadata();
+      res.json(buildingMetadata);
     } catch (error) {
-      handleControllerError(res, error, "fetching building codes and names");
+      handleControllerError(res, error, "fetching building metadata");
     }
   },
 
