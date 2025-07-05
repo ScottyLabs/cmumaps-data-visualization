@@ -5,10 +5,10 @@ import Loader from "../../components/shared/Loader";
 import { useGetDefaultFloorQuery } from "../../store/api/buildingApiSlice";
 
 export const Route = createFileRoute("/buildings/$buildingCode")({
-  component: RouteComponent,
+  component: Building,
 });
 
-function RouteComponent() {
+function Building() {
   const { buildingCode } = Route.useParams();
   const {
     data: floorLevel,

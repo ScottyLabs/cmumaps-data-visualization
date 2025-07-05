@@ -9,16 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FloorsFloorCodeRouteImport } from './routes/floors/$floorCode'
 import { Route as BuildingsBuildingCodeRouteImport } from './routes/buildings/$buildingCode'
 
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,52 +31,36 @@ const BuildingsBuildingCodeRoute = BuildingsBuildingCodeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/buildings/$buildingCode': typeof BuildingsBuildingCodeRoute
   '/floors/$floorCode': typeof FloorsFloorCodeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/buildings/$buildingCode': typeof BuildingsBuildingCodeRoute
   '/floors/$floorCode': typeof FloorsFloorCodeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/buildings/$buildingCode': typeof BuildingsBuildingCodeRoute
   '/floors/$floorCode': typeof FloorsFloorCodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/buildings/$buildingCode' | '/floors/$floorCode'
+  fullPaths: '/' | '/buildings/$buildingCode' | '/floors/$floorCode'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/buildings/$buildingCode' | '/floors/$floorCode'
-  id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/buildings/$buildingCode'
-    | '/floors/$floorCode'
+  to: '/' | '/buildings/$buildingCode' | '/floors/$floorCode'
+  id: '__root__' | '/' | '/buildings/$buildingCode' | '/floors/$floorCode'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
   BuildingsBuildingCodeRoute: typeof BuildingsBuildingCodeRoute
   FloorsFloorCodeRoute: typeof FloorsFloorCodeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -109,7 +87,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
   BuildingsBuildingCodeRoute: BuildingsBuildingCodeRoute,
   FloorsFloorCodeRoute: FloorsFloorCodeRoute,
 }
